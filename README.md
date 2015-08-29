@@ -62,3 +62,18 @@ marked.setOptions({
 });
 ```
  
+## Options
+
+Options for `marked-tex-renderer` is passed alongside with options to `marked`:
+
+```js
+marked.setOptions(options);
+```
+
+Following are the options for `marked-tex-renderer`:
+
+ * `failOnUnsupported`: If set to true, an error is thrown when plain-TeX-unsupported features are used. Possible values are `true`, `false`. Default is `true`.
+ * `delRenderer`: Renderer function for deleted text. Should have the signature `function (text)`, and should return TeX source for deleted text.
+ * `linkRenderer`: Renderer function for hyperlinks. Should have the signature `function (href, title, text)`, and should return TeX source for hyperlink.
+ * `imageRenderer`: Renderer function for images. Should have the signature `function (href, title, text)`, and should return TeX source for image.
+ 
