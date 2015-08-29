@@ -147,12 +147,12 @@ Renderer.prototype.table = function (header, body) {
 		var align = 'l|';
 		
 		switch (alignFlag) {
-			case 'right':
-				align = 'r|';
-				break;
-			case 'center':
-				align = 'c|';
-				break;
+		case 'right':
+			align = 'r|';
+			break;
+		case 'center':
+			align = 'c|';
+			break;
 		}
 		
 		tableSpec += align;
@@ -255,9 +255,17 @@ function htmlUnescape(html) {
 		if (n === 'amp') return '&';
 
 		if (n.charAt(0) === '#') {
-			return n.charAt(1) === 'x' ?
-				String.fromCharCode(parseInt(n.substring(2), 16)) : String.fromCharCode(+n.substring(1));
+			var charCode = 0;
+			
+			if (n.charAt(1) === 'x') {
+				charCode = parseInt(n.substring(2), 16);
+			} else {
+				charCode = +n.substring(1);
+			}
+			
+			return String.fromCharCode(charCode);
 		}
+		
 		return '';
 	});
 }
