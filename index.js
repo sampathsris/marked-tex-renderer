@@ -9,9 +9,16 @@
 
 var NEWLINE = '\r\n';
 
-function Renderer(options) {
-	this.options = options || {};
+function Renderer() {
 }
+
+Renderer.prototype.failOnUnsupported = function() {
+	if (!this.options.hasOwnProperty('failOnUnsupported')) {
+		return true;
+	}
+	
+	return this.options.failOnUnsupported;
+};
 
 Renderer.prototype.code = function (code, lang, escaped) {
 	return [
@@ -199,29 +206,40 @@ Renderer.prototype.br = function () {
 Renderer.prototype.del = function (text) {
 	if (this.options.delRenderer) {
 		return this.options.delRenderer(text);
+	} else if (this.failOnUnsupported()) {
+		throw new Error(
+			'Client should prvide a function to render deleted texts. ' +
+			'Use options.delRenderer = function (text)');
+	} else {
+		// deleted text is meant to be deleted. return ''.
+		return '';
 	}
-	
-	throw new Error(
-		'Client should prvide a function to render deleted texts. ' +
-		'Use options.delRenderer = function (text)');
 };
 
 Renderer.prototype.link = function (href, title, text) {
 	if (this.options.linkRenderer) {
 		return this.options.linkRenderer(href, title, text);
+	} else if (this.failOnUnsupported()) {
+		throw new Error(
+			'Client should prvide a function to render hyperlinks. ' +
+			'Use options.linkRenderer = function (href, title, text)');
+	} else {
+		// omit hyperlink and just return the text.
+		return text;
 	}
-	
-	return text;
 };
 
 Renderer.prototype.image = function (href, title, text) {
 	if (this.options.imageRenderer) {
 		return this.options.imageRenderer(href, title, text);
+	} else if (this.failOnUnsupported()) {
+		throw new Error(
+			'Client should prvide a function to render images. ' +
+			'Use options.imageRenderer = function (href, title, text)');
+	} else {
+		// some text without an image would be weird. return ''.
+		return '';
 	}
-	
-	throw new Error(
-		'Client should prvide a function to render images. ' +
-		'Use options.imageRenderer = function (href, title, text)');
 };
 
 Renderer.prototype.text = function (text) {

@@ -43,10 +43,12 @@ This text is **strong**. So is __this__.
 ### Emphasis and Strong
 
 ```
-This text is both ***strong and emphasized***. So is ___this___.
+This text is both ***strong and emphasized***.
+So is ___this___.
 ```
 
-This text is both ***strong and emphasized***. So is ___this___.
+This text is both ***strong and emphasized***.
+So is ___this___.
 
 ### Inline Code
 
@@ -55,6 +57,22 @@ This text contains `some code`.
 ```
 
 This text contains `some code`.
+
+### Deleted text
+
+```
+This sentence has ~~an interesting~~a deleted phrase.
+```
+
+This sentence has ~~an interesting~~a deleted phrase.
+
+### Hyperlinks
+
+```
+Visit [GitHub](https://github.com/).
+```
+
+Visit [GitHub](https://github.com/).
 
 ## Lists
 
