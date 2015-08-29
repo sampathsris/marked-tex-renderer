@@ -213,7 +213,9 @@ Renderer.prototype.del = function (text) {
 		return this.options.delRenderer(text);
 	}
 	
-	throw new Error('Deleted texts are not supported');
+	throw new Error(
+        'Client should prvide a function to render deleted texts. ' +
+        'Use options.delRenderer = function (text)');
 };
 
 Renderer.prototype.link = function (href, title, text) {
@@ -229,7 +231,9 @@ Renderer.prototype.image = function (href, title, text) {
 		return this.options.imageRenderer(href, title, text);
 	}
 	
-	return text;
+	throw new Error(
+        'Client should prvide a function to render images. ' +
+        'Use options.imageRenderer = function (href, title, text)');
 };
 
 Renderer.prototype.text = function (text) {
