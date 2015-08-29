@@ -128,7 +128,7 @@ Renderer.prototype.table = function (header, body) {
 	// remove the trailing comma from body row(s)
 	if (body) {
 		body = body.substr(0, body.length - 1);
-		bodyArr = JSON.parse(body);
+		bodyArr = JSON.parse('[' + body + ']');
 	}
 	
 	if (headerArr.length !== 0) {
@@ -143,22 +143,19 @@ Renderer.prototype.table = function (header, body) {
 	tableSpec = '{|';
 	
 	for (var i = 0; i < firstRow.length; i++) {
-		var align = 'l';
+		var alignFlag = firstRow[i].flags.align || 'none';
+		var align = 'l|';
 		
-		switch (firstRow[i].flags.align) {
+		switch (alignFlag) {
 			case 'right':
-				align = 'r';
+				align = 'r|';
 				break;
-			case 'right':
-				align = 'c';
+			case 'center':
+				align = 'c|';
 				break;
 		}
 		
 		tableSpec += align;
-		
-		if (i !== firstRow.length - 1) {
-			tableSpec += '|';
-		}
 	}
 	
 	tableSpec += '}';
@@ -167,22 +164,13 @@ Renderer.prototype.table = function (header, body) {
 	// create table body
 	tex += '\\hline' + NEWLINE;
 	
+	if (hasHeader) {
+		tex += createTableRow(headerArr);
+		tex += '\\hline' + NEWLINE;
+	}
+	
 	for (var j = 0; j < bodyArr.length; j++) {
-		var rowArr = bodyArr[j];
-		
-		for (var k = 0; k < rowArr.length; k++) {
-			tex += rowArr[k].content;
-			
-			if (k < rowArr.length - 1) {
-				tex += ' & ';
-			} else {
-				tex += ' \\\\' + NEWLINE;
-			}
-		}
-		
-		if (j === 0 && hasHeader) {
-			tex += '\\hline' + NEWLINE;
-		}
+		tex += createTableRow(bodyArr[j]);
 	}
 	
 	tex += '\\hline' + NEWLINE;
@@ -201,7 +189,7 @@ Renderer.prototype.em = function (text) {
 };
 
 Renderer.prototype.codespan = function (text) {
-	return '\\texttt{' + text + '}';
+	return '\\texttt{' + this.text(text) + '}';
 };
 
 Renderer.prototype.br = function () {
@@ -237,21 +225,57 @@ Renderer.prototype.image = function (href, title, text) {
 };
 
 Renderer.prototype.text = function (text) {
-	return unescape(text);
+	return texEscape(htmlUnescape(text));
 };
 
-function unescape(html) {
-    return html.replace(/&([#\w]+);/g, function(_, n) {
-        n = n.toLowerCase();
-        
-        if (n === 'colon') return ':';
-        
-        if (n.charAt(0) === '#') {
-            return n.charAt(1) === 'x' ?
-                String.fromCharCode(parseInt(n.substring(2), 16)) : String.fromCharCode(+n.substring(1));
-        }
-        return '';
-    });
+/*
+ * Helpers
+ */
+function createTableRow(rowArr) {
+	var tex = '';
+	
+	for (var c = 0; c < rowArr.length; c++) {
+		tex += rowArr[c].content;
+
+		if (c < rowArr.length - 1) {
+			tex += ' & ';
+		} else {
+			tex += ' \\\\' + NEWLINE;
+		}
+	}
+	
+	return tex;
+}
+
+function htmlUnescape(html) {
+	return html.replace(/&([#\w]+);/g, function(_, n) {
+		n = n.toLowerCase();
+
+		if (n === 'colon') return ':';
+		if (n === 'amp') return '&';
+
+		if (n.charAt(0) === '#') {
+			return n.charAt(1) === 'x' ?
+				String.fromCharCode(parseInt(n.substring(2), 16)) : String.fromCharCode(+n.substring(1));
+		}
+		return '';
+	});
+}
+
+function texEscape(text) {
+	// some characters have special meaning in TeX
+	//     \ & % $ # _ { } ~ ^
+	return text
+		.replace(/\\/g, '\\textbackslash')
+		.replace(/\&/g, '\\&')
+		.replace(/%/g, '\\%')
+		.replace(/\$/g, '\\$')
+		.replace(/#/g, '\\#')
+		.replace(/\_/g, '\\_')
+		.replace(/\{/g, '\\{')
+		.replace(/\}/g, '\\}')
+		.replace(/~/g, '\\textasciitilde')
+		.replace(/\^/g, '\\textasciicircum');
 }
 
 module.exports = Renderer;
