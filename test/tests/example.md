@@ -24,11 +24,35 @@ This should be a subparagraph
 
 ## Basic formatting
 
+### Emphasis
+
+```
 This text is *emphasized*. So is _this_.
+```
+
+This text is *emphasized*. So is _this_.
+
+### Strong
+
+```
+This text is **strong**. So is __this__.
+```
 
 This text is **strong**. So is __this__.
 
+### Emphasis and Strong
+
+```
 This text is both ***strong and emphasized***. So is ___this___.
+```
+
+This text is both ***strong and emphasized***. So is ___this___.
+
+### Inline Code
+
+```
+This text contains `some code`.
+```
 
 This text contains `some code`.
 
@@ -38,6 +62,12 @@ This text contains `some code`.
 
 To put a Girraffe in a refregerator:
 
+```
+ * Open refregerator door
+ * Put the Girraffe in
+ * Close the refregerator door
+```
+
  * Open refregerator door
  * Put the Girraffe in
  * Close the refregerator door
@@ -46,12 +76,19 @@ To put a Girraffe in a refregerator:
 
 A hitchhicker must have:
 
+```
+ 1. The Hitchhicker's Guide to Galaxy
+ 2. A towel
+```
+
  1. The Hitchhicker's Guide to Galaxy
  2. A towel
 
 ## Quotes
 
-Following is a quote:
+```
+> When I wrote it, only God and I knew; now God alone knows!
+```
 
 > When I wrote it, only God and I knew; now God alone knows!
 
@@ -61,11 +98,19 @@ Following is a quote:
 
 Code is marked by an indent of four spaces:
 
+```
+    console.log('Hello world!);
+```
+
     console.log('Hello world!);
 
 ### GitHub Style
 
 Code is fenced by three backtick characters:
+
+    ```
+    console.log('Hello GitHub');
+    ```
 
 ```
 console.log('Hello GitHub');
