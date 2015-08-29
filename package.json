@@ -1,0 +1,28 @@
+{
+  "name": "marked-tex-renderer",
+  "version": "1.0.0",
+  "description": "A plug-in style renderer to produce TeX output for marked",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sampathsris/marked-tex-renderer"
+  },
+  "keywords": [
+    "markdown",
+    "marked",
+    "latex",
+    "tex"
+  ],
+  "author": "Sampath Sitinamaluwa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sampathsris/marked-tex-renderer/issues"
+  },
+  "homepage": "https://github.com/sampathsris/marked-tex-renderer",
+  "devDependencies": {
+    "marked": "^0.3.5"
+  }
+}
