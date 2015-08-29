@@ -214,8 +214,8 @@ Renderer.prototype.del = function (text) {
 	}
 	
 	throw new Error(
-        'Client should prvide a function to render deleted texts. ' +
-        'Use options.delRenderer = function (text)');
+		'Client should prvide a function to render deleted texts. ' +
+		'Use options.delRenderer = function (text)');
 };
 
 Renderer.prototype.link = function (href, title, text) {
@@ -232,8 +232,8 @@ Renderer.prototype.image = function (href, title, text) {
 	}
 	
 	throw new Error(
-        'Client should prvide a function to render images. ' +
-        'Use options.imageRenderer = function (href, title, text)');
+		'Client should prvide a function to render images. ' +
+		'Use options.imageRenderer = function (href, title, text)');
 };
 
 Renderer.prototype.text = function (text) {
