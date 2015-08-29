@@ -247,6 +247,31 @@ Renderer.prototype.text = function (text) {
 };
 
 /*
+ * Implementation for unsupported features of plain TeX
+ */
+Renderer.delImpl = function (text) {
+	// requires \usepackage{ulem}
+	// use \normalem to retain normal emphasis
+	return '\\sout{' + text + '}';
+};
+
+Renderer.linkImpl = function (href, title, text) {
+	// requires \usepackage{hyperref}
+	return '\\href{' + href + '}{' + text + '}';
+};
+
+Renderer.imageImpl = function (herf, title, text) {
+	// requires \usepackage{graphicx}
+	return [
+		'\\begin{figure}[h!]',
+		'\\caption{' + text + '}',
+		'\\centering',
+		'\\includegraphics{' + herf + '}',
+		'\\end{figure}'
+	];
+};
+
+/*
  * Helpers
  */
 function createTableRow(rowArr) {

@@ -14,7 +14,11 @@ var fs = require('fs'),
 
 marked.setOptions({
 	renderer: new TexRenderer(),
-	gfm: true
+	gfm: true,
+	failOnUnsupported: false,
+	delRenderer: TexRenderer.delImpl,
+	linkRenderer: TexRenderer.linkImpl,
+	imageRenderer: TexRenderer.imageImpl
 });
 
 var mdfilename = __dirname + '/tests/example.md';
