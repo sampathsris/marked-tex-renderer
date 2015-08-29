@@ -26,7 +26,7 @@ console.log(marked('I am using __markdown__.'));
 
 You can supply rendering functions for these feature in following manner:
 
-```
+```js
 marked.setOptions({
 	renderer: new TexRenderer(),
 	gfm: true,
@@ -45,7 +45,7 @@ marked.setOptions({
 
 However, `marked-tex-renderer` provide some useful functions. You can use them, but you will have to include some `\usepackage` commands in your tex files manually:
 
-```
+```js
 marked.setOptions({
 	renderer: new TexRenderer(),
 	gfm: true,
