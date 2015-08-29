@@ -5,7 +5,7 @@ A plug-in style renderer to produce TeX output for [`marked`](https://github.com
 
 ## Usage
 
-```
+```js
 var marked = require('marked');
 var TexRenderer = require('marked-tex-renderer');
 
