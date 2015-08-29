@@ -213,3 +213,7 @@ Content Cell  | Content Cell
 There are 10 special characters that should be taken care of:
 
 `&` `%` `$` `#` `_` `{` `}` `~` `^` `\`
+
+## Images
+
+![The TeX Logo](TeX_logo.png)

@@ -263,12 +263,13 @@ Renderer.linkImpl = function (href, title, text) {
 Renderer.imageImpl = function (herf, title, text) {
 	// requires \usepackage{graphicx}
 	return [
+		NEWLINE,
 		'\\begin{figure}[h!]',
 		'\\caption{' + text + '}',
 		'\\centering',
 		'\\includegraphics{' + herf + '}',
 		'\\end{figure}'
-	];
+	].join(NEWLINE) + NEWLINE;
 };
 
 /*
