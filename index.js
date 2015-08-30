@@ -64,6 +64,11 @@ Renderer.prototype.heading = function (text, level, raw) {
 		break;
 	}
 
+	if (command !== '' && text.indexOf('\\{-\\}') !== -1) {
+		command += '*';
+		text = text.replace(' \\{-\\}', '').replace('\\{-\\}', '');
+	}
+	
 	return NEWLINE + command + '{' + text + '}' + NEWLINE;
 };
 

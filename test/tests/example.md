@@ -8,11 +8,11 @@ Let's check how the headings work.
 
 ### A Level 3 Heading
 
-This should be a subsection
+This should be a subsection.
 
 #### A Level 4 Heading
 
-This should be a subsubsection
+This should be a subsubsection.
 
 ##### A level 5 heading
 
@@ -20,11 +20,11 @@ This should be a paragraph.
 
 ###### A level 6 heading
 
-This should be a subparagraph
+This should be a subparagraph.
 
 ## Basic formatting
 
-### Emphasis
+### Emphasis {-}
 
 ```
 This text is *emphasized*. So is _this_.
@@ -32,7 +32,7 @@ This text is *emphasized*. So is _this_.
 
 This text is *emphasized*. So is _this_.
 
-### Strong
+### Strong {-}
 
 ```
 This text is **strong**. So is __this__.
@@ -40,7 +40,7 @@ This text is **strong**. So is __this__.
 
 This text is **strong**. So is __this__.
 
-### Emphasis and Strong
+### Emphasis and Strong {-}
 
 ```
 This text is both ***strong and emphasized***.
@@ -50,7 +50,7 @@ So is ___this___.
 This text is both ***strong and emphasized***.
 So is ___this___.
 
-### Inline Code
+### Inline Code {-}
 
 ```
 This text contains `some code`.
@@ -58,7 +58,7 @@ This text contains `some code`.
 
 This text contains `some code`.
 
-### Deleted text
+### Deleted text {-}
 
 ```
 This sentence has ~~an interesting~~a deleted phrase.
@@ -66,7 +66,7 @@ This sentence has ~~an interesting~~a deleted phrase.
 
 This sentence has ~~an interesting~~a deleted phrase.
 
-### Hyperlinks
+### Hyperlinks {-}
 
 ```
 Visit [GitHub](https://github.com/).
@@ -76,7 +76,7 @@ Visit [GitHub](https://github.com/).
 
 ## Lists
 
-### Unordered Lists
+### Unordered Lists {-}
 
 To put a Girraffe in a refregerator:
 
@@ -90,7 +90,7 @@ To put a Girraffe in a refregerator:
  * Put the Girraffe in
  * Close the refregerator door
 
-### Ordered Lists
+### Ordered Lists {-}
 
 A hitchhicker must have:
 
@@ -112,7 +112,7 @@ A hitchhicker must have:
 
 ## Code Listings
 
-### Traditional
+### Traditional {-}
 
 Code is marked by an indent of four spaces:
 
@@ -122,7 +122,7 @@ Code is marked by an indent of four spaces:
 
     console.log('Hello world!);
 
-### GitHub Style
+### GitHub Style {-}
 
 Code is fenced by three backtick characters:
 
@@ -136,7 +136,7 @@ console.log('Hello GitHub');
 
 ## Tables
 
-### A minimal table
+### A minimal table {-}
 
 ```
 First Header  | Second Header
@@ -150,7 +150,7 @@ First Header  | Second Header
 Content Cell  | Content Cell
 Content Cell  | Content Cell
 
-### With extra lines on sides
+### With extra lines on sides {-}
 
 ```
 | First Header  | Second Header |
@@ -164,7 +164,7 @@ Content Cell  | Content Cell
 | Content Cell  | Content Cell  |
 | Content Cell  | Content Cell  |
 
-### Columns with irregular width
+### Columns with irregular width {-}
 
 ```
 | Name | Description          |
@@ -178,7 +178,7 @@ Content Cell  | Content Cell
 | Help      | Display the help window.|
 | Close     | Closes a window     |
 
-### Table with inlined markdown
+### Table with inlined markdown {-}
 
 ```
 | Name | Description          |
@@ -192,7 +192,7 @@ Content Cell  | Content Cell
 | Help      | Display the **help** window.|
 | Close     | _Closes_ a window     |
 
-### Aligned cells
+### Aligned cells {-}
 
 ```
 | Left-Aligned  | Center Aligned  | Right Aligned |
