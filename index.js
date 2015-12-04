@@ -213,7 +213,7 @@ Renderer.prototype.del = function (text) {
 		return this.options.delRenderer(text);
 	} else if (this.failOnUnsupported()) {
 		throw new Error(
-			'Client should prvide a function to render deleted texts. ' +
+			'Client should provide a function to render deleted texts. ' +
 			'Use options.delRenderer = function (text)');
 	} else {
 		// deleted text is meant to be deleted. return ''.
@@ -226,7 +226,7 @@ Renderer.prototype.link = function (href, title, text) {
 		return this.options.linkRenderer(href, title, text);
 	} else if (this.failOnUnsupported()) {
 		throw new Error(
-			'Client should prvide a function to render hyperlinks. ' +
+			'Client should provide a function to render hyperlinks. ' +
 			'Use options.linkRenderer = function (href, title, text)');
 	} else {
 		// omit hyperlink and just return the text.
@@ -239,7 +239,7 @@ Renderer.prototype.image = function (href, title, text) {
 		return this.options.imageRenderer(href, title, text);
 	} else if (this.failOnUnsupported()) {
 		throw new Error(
-			'Client should prvide a function to render images. ' +
+			'Client should provide a function to render images. ' +
 			'Use options.imageRenderer = function (href, title, text)');
 	} else {
 		// some text without an image would be weird. return ''.
