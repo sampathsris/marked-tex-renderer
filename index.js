@@ -205,7 +205,7 @@ Renderer.prototype.codespan = function (text) {
 };
 
 Renderer.prototype.br = function () {
-	return '\\';
+	return '\\\\';
 };
 
 Renderer.prototype.del = function (text) {
