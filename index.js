@@ -43,24 +43,29 @@ Renderer.prototype.html = function (html) {
 Renderer.prototype.heading = function (text, level, raw) {
 	var command = '';
 
+	var levelStyles = [];
+	if (this.options.hasOwnProperty('levelStyles')) {
+		levelStyles = this.options.levelStyles;
+	}
+
 	switch (level) {
 	case 1:
-		command = '\\chapter';
+		command = levelStyles[1] || '\\chapter';
 		break;
 	case 2:
-		command = '\\section';
+		command = levelStyles[2] || '\\section';
 		break;
 	case 3:
-		command = '\\subsection';
+		command = levelStyles[3] || '\\subsection';
 		break;
 	case 4:
-		command = '\\subsubsection';
+		command = levelStyles[4] || '\\subsubsection';
 		break;
 	case 5:
-		command = '\\paragraph';
+		command = levelStyles[5] || '\\paragraph';
 		break;
 	case 6:
-		command = '\\subparagraph';
+		command = levelStyles[6] || '\\subparagraph';
 		break;
 	}
 
