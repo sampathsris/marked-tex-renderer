@@ -328,6 +328,7 @@ function texEscape(text) {
 	// some characters have special meaning in TeX
 	//     \ & % $ # _ { } ~ ^
 	return text
+		.replace(/\\/g, '\\textbackslash{}')
 		.replace(/\&/g, '\\&')
 		.replace(/%/g, '\\%')
 		.replace(/\$/g, '\\$')
@@ -337,7 +338,6 @@ function texEscape(text) {
 		.replace(/\}/g, '\\}')
 		.replace(/\]/g, '{]}')
 		.replace(/\[/g, '{[}')
-		.replace(/\\/g, '\\textbackslash{}')
 		.replace(/~/g, '\\textasciitilde{}')
 		.replace(/\^/g, '\\textasciicircum{}');
 }
