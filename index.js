@@ -106,8 +106,7 @@ Renderer.prototype.listitem = function (text) {
 };
 
 Renderer.prototype.paragraph = function (text) {
-	//return '\\par ' + text;
-	return NEWLINE + NEWLINE + NEWLINE + text;
+	return '\\par ' + text;
 };
 
 Renderer.prototype.tablecell = function (content, flags) {
@@ -211,7 +210,7 @@ Renderer.prototype.codespan = function (text) {
 };
 
 Renderer.prototype.br = function () {
-	return '\\\\' + NEWLINE;
+	return '\\\\';
 };
 
 Renderer.prototype.del = function (text) {
