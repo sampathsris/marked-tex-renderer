@@ -210,7 +210,7 @@ Renderer.prototype.codespan = function (text) {
 };
 
 Renderer.prototype.br = function () {
-	return '\\\\';
+	return '\\\\ ';
 };
 
 Renderer.prototype.del = function (text) {
@@ -328,7 +328,7 @@ function texEscape(text) {
 	// some characters have special meaning in TeX
 	//     \ & % $ # _ { } ~ ^
         return text
-         .replace(String.fromCharCode(92), '--textbackslashtemporary--')
+         .replace(/\\/, '--textbackslashtemporary--')
          .replace(/\{/g, '\\{')
          .replace(/\}/g, '\\}')
          .replace(/--textbackslashtemporary--/g, '\\textbackslash{}')
