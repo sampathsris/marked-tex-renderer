@@ -327,19 +327,20 @@ function htmlUnescape(html) {
 function texEscape(text) {
 	// some characters have special meaning in TeX
 	//     \ & % $ # _ { } ~ ^
-	return text
-		.replace(/\\/g, '\\textbackslash{}')
-		.replace(/\&/g, '\\&')
-		.replace(/%/g, '\\%')
-		.replace(/\$/g, '\\$')
-		.replace(/#/g, '\\#')
-		.replace(/\_/g, '\\_')
-		.replace(/\{/g, '\\{')
-		.replace(/\}/g, '\\}')
-		.replace(/\]/g, '{]}')
-		.replace(/\[/g, '{[}')
-		.replace(/~/g, '\\textasciitilde{}')
-		.replace(/\^/g, '\\textasciicircum{}');
+        return text
+         .replace(/\\/g, '\\textbackslashtemporary')
+         .replace(/\{/g, '\\{')
+         .replace(/\}/g, '\\}')
+         .replace(/\\textbackslashtemporary/g, '\\textbackslash{}')
+         .replace(/\]/g, '{]}')
+         .replace(/\[/g, '{[}')
+         .replace(/\&/g, '\\&')
+         .replace(/%/g,  '\\%')
+         .replace(/\$/g, '\\$')
+         .replace(/#/g,  '\\#')
+         .replace(/\_/g, '\\_')
+         .replace(/~/g, '\\textasciitilde{}')
+         .replace(/\^/g, '\\textasciicircum{}');
 }
 
 module.exports = Renderer;
