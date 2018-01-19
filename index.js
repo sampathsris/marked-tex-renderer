@@ -328,10 +328,10 @@ function texEscape(text) {
 	// some characters have special meaning in TeX
 	//     \ & % $ # _ { } ~ ^
         return text
-         .replace(/\\/g, '\\textbackslashtemporary')
+         .replace(String.fromCharCode(92), '--textbackslashtemporary--')
          .replace(/\{/g, '\\{')
          .replace(/\}/g, '\\}')
-         .replace(/\\textbackslashtemporary/g, '\\textbackslash{}')
+         .replace(/--textbackslashtemporary--/g, '\\textbackslash{}')
          .replace(/\]/g, '{]}')
          .replace(/\[/g, '{[}')
          .replace(/\&/g, '\\&')
