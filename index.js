@@ -340,7 +340,13 @@ function texEscape(text) {
          .replace(/#/g,  '\\#')
          .replace(/\_/g, '\\_')
          .replace(/~/g, '\\textasciitilde{}')
-         .replace(/\^/g, '\\textasciicircum{}');
+         .replace(/\^/g, '\\textasciicircum{}')
+         .replace(/„/g, '\\quotedblbase{}')
+         .replace(/“/g, '\\textquotedblleft{}')
+         .replace(/”/g, '\\textquotedblright{}')
+         .replace(/“/g, '``')
+         .replace(/”/g, '\'\'')
+         .replace(/"/,  '\\textquotedbl{}');
 }
 
 module.exports = Renderer;
