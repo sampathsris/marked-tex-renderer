@@ -327,7 +327,7 @@ function htmlUnescape(html) {
 function texEscape(text) {
 	// some characters have special meaning in TeX
 	//     \ & % $ # _ { } ~ ^
-        return "xx-" + text
+        return text
 		 .replace(/\\\\/g, '\n')        
          .replace(/\\/g, '\\textbackslash ')
          .replace(/\n\n/g, '\\par ')
