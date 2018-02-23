@@ -210,7 +210,7 @@ Renderer.prototype.codespan = function (text) {
 };
 
 Renderer.prototype.br = function () {
-	return '\\newline ';
+	return '\\\\ ';
 };
 
 Renderer.prototype.del = function (text) {
@@ -331,7 +331,7 @@ function texEscape(text) {
 		 .replace(/\\\\/g, '\n')        
          .replace(/\\/g, '\\textbackslash ')
          .replace(/\n\n/g, '\\par ')
-         .replace(/\n/g,   '\\newline ')         
+         .replace(/\n/g,   '\\\\ ')         
          .replace(/\{/g, '\\{')
          .replace(/\}/g, '\\}')
          .replace(/\]/g, '{]}')
