@@ -328,10 +328,12 @@ function texEscape(text) {
 	// some characters have special meaning in TeX
 	//     \ & % $ # _ { } ~ ^
         return text
-         .replace(/\\/, '--textbackslashtemporary--')
+		 .replace(/\\\\/g, '\n')        
+         .replace(/\\/g, '\\textbackslash ')
+         .replace(/\n\n/g, '\\par ')
+         .replace(/\n/g,   '\\newline ')         
          .replace(/\{/g, '\\{')
          .replace(/\}/g, '\\}')
-         .replace(/--textbackslashtemporary--/g, '\\textbackslash{}')
          .replace(/\]/g, '{]}')
          .replace(/\[/g, '{[}')
          .replace(/\&/g, '\\&')
