@@ -346,7 +346,9 @@ function texEscape(text) {
          .replace(/”/g, '\\textquotedblright{}')
          .replace(/“/g, '``')
          .replace(/”/g, '\'\'')
-         .replace(/"/,  '\\textquotedbl{}');
+         .replace(/"/,  '\\textquotedbl{}')
+         .replace(/—/,  '\\textemdash{}')
+         .replace(/–/,  '\\textendash{}');
 }
 
 module.exports = Renderer;
