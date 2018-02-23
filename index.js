@@ -69,12 +69,12 @@ Renderer.prototype.heading = function (text, level, raw) {
 		break;
 	}
 
-	//if (command !== '' && text.indexOf('\\{-\\}') !== -1) {
-	//	command += '*';
-	//	text = text.replace(' \\{-\\}', '').replace('\\{-\\}', '');
-	//}
+	if (command !== '' && text.indexOf('\\{-\\}') !== -1) {
+		command += '*';
+		text = text.replace(' \\{-\\}', '').replace('\\{-\\}', '');
+	}
 	
-	return NEWLINE + command + '{' + this.text(text) + '}' + NEWLINE;
+	return NEWLINE + command + '{' + text + '}' + NEWLINE;
 };
 
 Renderer.prototype.hr = function () {
@@ -327,7 +327,7 @@ function htmlUnescape(html) {
 function texEscape(text) {
 	// some characters have special meaning in TeX
 	//     \ & % $ # _ { } ~ ^
-        return text
+        return "xx-" + text
 		 .replace(/\\\\/g, '\n')        
          .replace(/\\/g, '\\textbackslash ')
          .replace(/\n\n/g, '\\par ')
