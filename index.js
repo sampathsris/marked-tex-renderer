@@ -351,10 +351,13 @@ function texEscape(text) {
          .replace(/’/g, '\\textquoteright{}')
          .replace(/´/g, '\\textasciiacute{}')
          .replace(/\^/g, '\\textasciicircum{}')
-         .replace(/"/,  '\\textquotedbl{}')
-         .replace(/—/,  '\\textemdash{}')
-         .replace(/–/,  '\\textendash{}')
-         .replace(/→/,  '\\textrightarrow{}');
+         .replace(/"/g,  '\\textquotedbl{}')
+         .replace(/—/g,  '\\textemdash{}')
+         .replace(/–/g,  '\\textendash{}')
+         .replace(/→/g,  '\\textrightarrow{}')
+         .replace(/↑/g,  '\\textuparrow{}')
+         .replace(/↓/g,  '\\textdownarrow{}')
+         .replace(/←/g,  '\\textleftarrow{}');
 }
 
 module.exports = Renderer;
