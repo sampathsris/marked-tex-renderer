@@ -282,6 +282,12 @@ Renderer.imageImpl = function (herf, title, text) {
 	].join(NEWLINE) + NEWLINE;
 };
 
+/* Export the escape function as well */
+
+Renderer.texEscape = function(text) {
+	return texEscape(text);
+}
+
 /*
  * Helpers
  */
@@ -360,4 +366,5 @@ function texEscape(text) {
          .replace(/←/g,  '\\textleftarrow{}');
 }
 
+ 
 module.exports = Renderer;
