@@ -23,7 +23,7 @@ Renderer.prototype.failOnUnsupported = function() {
 Renderer.prototype.code = function (code, lang, escaped) {
 	return [
 		'\\begin{verbatim}',
-		this.text(code).replace(/ /g,'~'),
+		this.text(code).replace(/ /g,'\\space '),
 		'\\end{verbatim}'
 	].join(NEWLINE) + NEWLINE;
 };
