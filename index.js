@@ -337,7 +337,7 @@ function texEscape(text) {
 		 .replace(/\\\\/g, '\n')        
          .replace(/\\/g, '\\textbackslash ')
          .replace(/[^\n](\n\n)[^\n]/g, function(a){return(a.substr(0,1) + '\\par ' + a.substr(-1,1));})
-         .replace(/\n/g,   '\\\\\n')         
+         .replace(/\n/g,   '\\leavevmode \\\\\n')         
          .replace(/\{/g, '\\{')
          .replace(/\}/g, '\\}')
          .replace(/\]/g, '{]}')
