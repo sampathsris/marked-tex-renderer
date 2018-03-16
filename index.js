@@ -363,7 +363,8 @@ function texEscape(text) {
          .replace(/↑/g,  '\\textuparrow{}')
          .replace(/↓/g,  '\\textdownarrow{}')
          .replace(/←/g,  '\\textleftarrow{}')
-         .replace(/\u00AD/g,  '\\nobreakdash-');
+         .replace(/\u00AD/g,  '\\nobreakdash-')
+         .replace(/\u001F/g,  '\\nobreakdash-');
 }
 
  
