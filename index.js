@@ -356,14 +356,14 @@ function texEscape(text) {
          .replace(/”/g, '\'\'')
          .replace(/’/g, '\\textquoteright{}')
          .replace(/´/g, '\\textasciiacute{}')
-         .replace(/\^/g, '\\textasciicircum{}')
          .replace(/"/g,  '\\textquotedbl{}')
          .replace(/—/g,  '\\textemdash{}')
          .replace(/–/g,  '\\textendash{}')
          .replace(/→/g,  '\\textrightarrow{}')
          .replace(/↑/g,  '\\textuparrow{}')
          .replace(/↓/g,  '\\textdownarrow{}')
-         .replace(/←/g,  '\\textleftarrow{}');
+         .replace(/←/g,  '\\textleftarrow{}')
+         .replace(/\^_/g,  '\\nobreakdash-');
 }
 
  
