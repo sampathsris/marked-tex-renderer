@@ -308,6 +308,12 @@ Renderer.texEscape = function(text) {
 	return texEscape(text);
 }
 
+/* Export the htmlUnescape function as well */
+
+Renderer.htmlUnescape = function(html) {
+	return htmlUnescape(html);
+}
+
 /*
  * Helpers
  */
