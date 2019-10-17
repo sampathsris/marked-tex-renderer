@@ -271,7 +271,7 @@ Renderer.prototype.text = function (text) {
 Renderer.verbatimImpl = function (code, lang, escaped) {
 	return [
 		'\\begin{verbatim}',
-		this.text(code).replace(/ /g,'\\- '),
+		texEscape(htmlUnescape(code)).replace(/ /g,'\\- '),
 		'\\end{verbatim}'
 	].join(NEWLINE) + NEWLINE;
 };
