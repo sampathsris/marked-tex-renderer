@@ -21,12 +21,20 @@ Renderer.prototype.failOnUnsupported = function() {
 };
 
 Renderer.prototype.code = function (code, lang, escaped) {
-	return [
-		'\\begin{verbatim}',
-		this.text(code).replace(/ /g,'\\- '),
-		'\\end{verbatim}'
-	].join(NEWLINE) + NEWLINE;
+	if (this.options.verbatimRenderer) {
+		return this.options.verbatimRenderer(code, lang, escaped);
+	} else if (this.failOnUnsupported()) {
+		throw new Error(
+			'Client should provide a function to render Verbatim Text. ' +
+			'Use options.verbatimRenderer = function (code, lang, escaped)');
+	} else {
+		// some text without an image would be weird. return ''.
+		return '';
+	}
 };
+
+
+
 
 Renderer.prototype.blockquote = function (quote) {
 	return [
@@ -254,6 +262,18 @@ Renderer.prototype.image = function (href, title, text) {
 
 Renderer.prototype.text = function (text) {
 	return texEscape(htmlUnescape(text));
+};
+
+/*
+ * Implementation for Standard Verbatim Environment
+ */
+
+Renderer.verbatimImpl = function (code, lang, escaped) {
+	return [
+		'\\begin{verbatim}',
+		this.text(code).replace(/ /g,'\\- '),
+		'\\end{verbatim}'
+	].join(NEWLINE) + NEWLINE;
 };
 
 /*
