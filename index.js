@@ -82,7 +82,8 @@ Renderer.prototype.heading = function (text, level, raw) {
 		text = text.replace(' \\{-\\}', '').replace('\\{-\\}', '');
 	}
 	
-	return NEWLINE + command + '{' + this.text(raw) + '}' + NEWLINE;
+	//return NEWLINE + command + '{' + this.text(raw) + '}' + NEWLINE;
+	return NEWLINE + command + '{' + text + '}' + NEWLINE;
 };
 
 Renderer.prototype.hr = function () {
