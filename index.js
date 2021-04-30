@@ -83,7 +83,7 @@ Renderer.prototype.heading = function (text, level, raw) {
 	}
 	
 	//return NEWLINE + command + '{' + this.text(raw) + '}' + NEWLINE;
-	return NEWLINE + command + '{' + text + '}' + NEWLINE;
+	return NEWLINE + command + '[' + replaceNewline(text) + ']{' + text + '}' + NEWLINE;
 };
 
 Renderer.prototype.hr = function () {
@@ -309,6 +309,13 @@ Renderer.texEscape = function(text) {
 	return texEscape(text);
 }
 
+/* Export the clear new line function as well */
+
+Renderer.replaceNewline = function(text) {
+	return replaceNewline(text);
+}
+
+
 /* Export the htmlUnescape function as well */
 
 Renderer.htmlUnescape = function(html) {
@@ -355,6 +362,10 @@ function htmlUnescape(html) {
 		
 		return '';
 	});
+}
+
+function replaceNewline(text) {
+	return text.replace('----force-new-line---', '');
 }
 
 function texEscape(text) {
