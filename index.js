@@ -365,7 +365,7 @@ function htmlUnescape(html) {
 }
 
 function replaceNewline(text) {
-	return text.replace('----force-new-line---', '');
+	return text.replace('----force-new-line---', ' ');
 }
 
 function texEscape(text) {
