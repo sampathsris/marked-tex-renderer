@@ -76,14 +76,17 @@ Renderer.prototype.heading = function (text, level, raw) {
 		command = levelStyles[6] || '\\subparagraph';
 		break;
 	}
-
 	if (command !== '' && text.indexOf('\\{-\\}') !== -1) {
 		command += '*';
 		text = text.replace(' \\{-\\}', '').replace('\\{-\\}', '');
 	}
-	
-	//return NEWLINE + command + '{' + this.text(raw) + '}' + NEWLINE;
-	return NEWLINE + command + '[' + replaceNewline(text) + ']{' + text + '}' + NEWLINE;
+	if (text.indexOf('||') !== -1) {
+		text = text.split('||');
+		return NEWLINE + command + '[' + text[1] + ']{' + text[0] + '}' + NEWLINE;
+	}
+	else {
+		return NEWLINE + command + '[' + replaceNewline(text) + ']{' + text + '}' + NEWLINE;
+	}	
 };
 
 Renderer.prototype.hr = function () {
