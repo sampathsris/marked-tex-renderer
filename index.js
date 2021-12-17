@@ -21,12 +21,20 @@ Renderer.prototype.failOnUnsupported = function() {
 };
 
 Renderer.prototype.code = function (code, lang, escaped) {
-	return [
-		'\\begin{verbatim}',
-		code,
-		'\\end{verbatim}'
-	].join(NEWLINE) + NEWLINE;
+	if (this.options.verbatimRenderer) {
+		return this.options.verbatimRenderer(code, lang, escaped);
+	} else if (this.failOnUnsupported()) {
+		throw new Error(
+			'Client should provide a function to render Verbatim Text. ' +
+			'Use options.verbatimRenderer = function (code, lang, escaped)');
+	} else {
+		// some text without an image would be weird. return ''.
+		return '';
+	}
 };
+
+
+
 
 Renderer.prototype.blockquote = function (quote) {
 	return [
@@ -43,33 +51,42 @@ Renderer.prototype.html = function (html) {
 Renderer.prototype.heading = function (text, level, raw) {
 	var command = '';
 
-	switch (level) {
-	case 1:
-		command = '\\chapter';
-		break;
-	case 2:
-		command = '\\section';
-		break;
-	case 3:
-		command = '\\subsection';
-		break;
-	case 4:
-		command = '\\subsubsection';
-		break;
-	case 5:
-		command = '\\paragraph';
-		break;
-	case 6:
-		command = '\\subparagraph';
-		break;
+	var levelStyles = [];
+	if (this.options.hasOwnProperty('levelStyles')) {
+		levelStyles = this.options.levelStyles;
 	}
 
+	switch (level) {
+	case 1:
+		command = levelStyles[1] || '\\chapter';
+		break;
+	case 2:
+		command = levelStyles[2] || '\\section';
+		break;
+	case 3:
+		command = levelStyles[3] || '\\subsection';
+		break;
+	case 4:
+		command = levelStyles[4] || '\\subsubsection';
+		break;
+	case 5:
+		command = levelStyles[5] || '\\paragraph';
+		break;
+	case 6:
+		command = levelStyles[6] || '\\subparagraph';
+		break;
+	}
 	if (command !== '' && text.indexOf('\\{-\\}') !== -1) {
 		command += '*';
 		text = text.replace(' \\{-\\}', '').replace('\\{-\\}', '');
 	}
-	
-	return NEWLINE + command + '{' + text + '}' + NEWLINE;
+	if (text.indexOf('||') !== -1) {
+		text = text.split('||');
+		return NEWLINE + command + '[' + text[1] + ']{' + text[0] + '}' + NEWLINE;
+	}
+	else {
+		return NEWLINE + command + '[' + replaceNewline(text) + ']{' + text + '}' + NEWLINE;
+	}	
 };
 
 Renderer.prototype.hr = function () {
@@ -205,7 +222,7 @@ Renderer.prototype.codespan = function (text) {
 };
 
 Renderer.prototype.br = function () {
-	return '\\\\';
+	return '\\\\ ';
 };
 
 Renderer.prototype.del = function (text) {
@@ -252,6 +269,18 @@ Renderer.prototype.text = function (text) {
 };
 
 /*
+ * Implementation for Standard Verbatim Environment
+ */
+
+Renderer.verbatimImpl = function (code, lang, escaped) {
+	return [
+		'\\begin{verbatim}',
+		texEscape(htmlUnescape(code)).replace(/ /g,'\\- '),
+		'\\end{verbatim}'
+	].join(NEWLINE) + NEWLINE;
+};
+
+/*
  * Implementation for unsupported features of plain TeX
  */
 Renderer.delImpl = function (text) {
@@ -276,6 +305,25 @@ Renderer.imageImpl = function (herf, title, text) {
 		'\\end{figure}'
 	].join(NEWLINE) + NEWLINE;
 };
+
+/* Export the escape function as well */
+
+Renderer.texEscape = function(text) {
+	return texEscape(text);
+}
+
+/* Export the clear new line function as well */
+
+Renderer.replaceNewline = function(text) {
+	return replaceNewline(text);
+}
+
+
+/* Export the htmlUnescape function as well */
+
+Renderer.htmlUnescape = function(html) {
+	return htmlUnescape(html);
+}
 
 /*
  * Helpers
@@ -319,20 +367,47 @@ function htmlUnescape(html) {
 	});
 }
 
+function replaceNewline(text) {
+	return text.replace(/----force-new-line---/g, ' ');
+}
+
 function texEscape(text) {
 	// some characters have special meaning in TeX
 	//     \ & % $ # _ { } ~ ^
-	return text
-		.replace(/\\/g, '\\textbackslash')
-		.replace(/\&/g, '\\&')
-		.replace(/%/g, '\\%')
-		.replace(/\$/g, '\\$')
-		.replace(/#/g, '\\#')
-		.replace(/\_/g, '\\_')
-		.replace(/\{/g, '\\{')
-		.replace(/\}/g, '\\}')
-		.replace(/~/g, '\\textasciitilde')
-		.replace(/\^/g, '\\textasciicircum');
+        return text
+		 .replace(/\\\\/g, '\n')        
+         .replace(/\\/g, '\\textbackslash ')
+         .replace(/[^\n](\n\n)[^\n]/g, function(a){return(a.substr(0,1) + '\\par ' + a.substr(-1,1));})
+         .replace(/\n/g,   '\\leavevmode \\\\\n')         
+         .replace(/\{/g, '\\{')
+         .replace(/\}/g, '\\}')
+         .replace(/\]/g, '{]}')
+         .replace(/\[/g, '{[}')
+         .replace(/\&/g, '\\&')
+         .replace(/%/g,  '\\%')
+         .replace(/\$/g, '\\$')
+         .replace(/#/g,  '\\#')
+         .replace(/\_/g, '\\_')
+         .replace(/~/g, '\\textasciitilde{}')
+         .replace(/\^/g, '\\textasciicircum{}')
+         .replace(/„/g, '\\quotedblbase{}')
+         .replace(/“/g, '\\textquotedblleft{}')
+         .replace(/”/g, '\\textquotedblright{}')
+		 .replace(/“/g, '``')
+		 .replace(/…/g, '\\dots{}')
+         .replace(/”/g, '\'\'')
+         .replace(/’/g, '\\textquoteright{}')
+         .replace(/´/g, '\\textasciiacute{}')
+         .replace(/"/g,  '\\textquotedbl{}')
+         .replace(/—/g,  '\\textemdash{}')
+         .replace(/–/g,  '\\textendash{}')
+         .replace(/→/g,  '\\textrightarrow{}')
+         .replace(/↑/g,  '\\textuparrow{}')
+         .replace(/↓/g,  '\\textdownarrow{}')
+         .replace(/←/g,  '\\textleftarrow{}')
+         .replace(/\u00AD/g,  '')
+         .replace(/\u001F/g,  '');
 }
 
+ 
 module.exports = Renderer;

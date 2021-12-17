@@ -76,4 +76,23 @@ Following are the options for `marked-tex-renderer`:
  * `delRenderer`: Renderer function for deleted text. Should have the signature `function (text)`, and should return TeX source for deleted text.
  * `linkRenderer`: Renderer function for hyperlinks. Should have the signature `function (href, title, text)`, and should return TeX source for hyperlink.
  * `imageRenderer`: Renderer function for images. Should have the signature `function (href, title, text)`, and should return TeX source for image.
+ * `levelStyles`: Object with LaTeX commands how to translate headings. Default is `{}` and will result in the default usage of headings defined in `Renderer.prototype.heading`. See example for how to change it.
  
+`levelStyles` Example: 
+
+This example would set all headings to the same paragraph style:
+
+    marked.setOptions({
+      levelStyles: {
+        1: '\\paragraph',
+        2: '\\paragraph',
+        3: '\\paragraph',
+        4: '\\paragraph',
+        5: '\\paragraph',
+        6: '\\paragraph'
+      }
+    });
+
+This would reset the styles to the default setting:
+
+    marked.setOptions({levelStyles: {}});
