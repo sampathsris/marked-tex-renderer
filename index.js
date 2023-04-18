@@ -350,6 +350,7 @@ function htmlUnescape(html) {
 
 		if (n === 'colon') return ':';
 		if (n === 'amp') return '&';
+		if (n === 'quot') return '"';
 
 		if (n.charAt(0) === '#') {
 			var charCode = 0;
